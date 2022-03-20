@@ -1,0 +1,13 @@
+{% extends 'main/layout.html' %}
+
+{% block title%} Мыши {% endblock %}
+{% block content %}
+<h1>Мыши в наличии</h1>
+    {% for product in products %}
+        <div class = "alert alert-warning">
+            <h3>{{product.brand}}</h3>
+            <p>{{product.model}}</p>
+            <p>{{product.description}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

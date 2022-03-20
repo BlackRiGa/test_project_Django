@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+    <p>
+        Brand {{ brand }}
+    </p>
+    <p>
+        {% if model %}
+            Model {{ model }}
+        {% endif %}
+    </p>
+    <p>
+    cars:
+    {% for car in available_cars %}
+
+    <p>
+        Brand {{ car.brand }}
+    </p>
+
+    <p>
+        Model {{ car.model }}
+    </p>
+
+    <p>
+        Price {{ car.price }}
+    </p>
+    {% endfor %}
+    </p>
+{% endblock %}
+

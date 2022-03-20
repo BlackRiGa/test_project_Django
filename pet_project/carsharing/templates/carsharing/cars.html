@@ -1,0 +1,14 @@
+{% extends 'main/layout.html' %}
+
+{% block title%} Машины {% endblock %}
+{% block content %}
+<h1>Машины в наличии</h1>
+    {% for car in cars %}
+        <div class = "alert alert-warning">
+            <h3>{{car.brand}}</h3>
+            <p>{{car.model}}</p>
+            <p>{{car.description}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+

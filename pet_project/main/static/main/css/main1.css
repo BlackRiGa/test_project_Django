@@ -1,0 +1,12 @@
+body {
+    background: #9b8f7c;
+}
+
+.logo {
+    width:100%;
+}
+
+.container .content{
+    text-align: center;
+    width: 75%;
+}
