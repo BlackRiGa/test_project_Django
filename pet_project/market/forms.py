@@ -1,19 +1,21 @@
-
 from .models import Product
-from django.forms import ModelForm, TextInput, DateTimeInput, FloatField, Textarea, DateInput, DateField
+from django.forms import ModelForm, TextInput, DateTimeInput, FloatField, Textarea, Select, DateInput, DateField, FileInput
+from django.forms.widgets import DateInput as WidgetDateInput
 
 
 class ProductForm(ModelForm):
+    data = DateField(widget=WidgetDateInput(format='%m/%d/%Y'))
+
     class Meta:
         model = Product
-        fields = ['price', 'brand', 'model', 'description', 'data']
+        fields = ['price', 'brand', 'model', 'description', 'data', 'image']
 
         widgets = {
-            'brand': TextInput(attrs={
+            'brand': Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Бренд',
             }),
-            'model': TextInput(attrs={
+            'model': Select(attrs={
                 'class': 'form-control',
                 'placeholder': 'Модель',
             }),
@@ -28,5 +30,6 @@ class ProductForm(ModelForm):
             'description': Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Описание',
-            })
+            }),
+            'image': FileInput()
         }

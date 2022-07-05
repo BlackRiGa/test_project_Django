@@ -2,18 +2,16 @@
 
 {% block title%} Добавление модели {% endblock %}
 {% block content %}
-
     {% if form.instance.id %}
         <h1>Форма обновления</h1>
     {% else %}
         <h1>Форма добавления</h1>
     {% endif %}
 
-        <form method = "post" enctype="multipart/form-data">
+     <form method = "post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.brand}}</br>
         {{form.model}}</br>
-        {{form.light}}</br>
         {{form.price}}</br>
         {{form.description}}</br>
         {{form.data}}</br>
@@ -25,9 +23,8 @@
             </div>
         {% endif %}
 
-        <button class = "btn btn-success" type="endtype">
+    <button class = "btn btn-success" type="submit">
             {% if form.instance.id %} Обновить {% else %} Добавить {% endif %}
         </button>
-
             </form>
 {% endblock %}

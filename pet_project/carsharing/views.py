@@ -1,7 +1,31 @@
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from carsharing.forms import CarForm
 from carsharing.models import Car
+from django.views.generic import DeleteView, UpdateView, DetailView
+
+
+class CarDetailView(DetailView):
+    model = Car
+    template_name = 'carsharing/car_details.html'
+    context_object_name = 'car'
+
+
+class CarUpdateView(UpdateView):
+    model = Car
+    template_name = 'carsharing/create_car.html'
+    form_class = CarForm
+
+    def form_invalid(self, form):
+        return HttpResponse("form is invalid.. this is just an HttpResponse object {}".format(form.errors))
+
+
+class CarDeleteView(DeleteView):
+    model = Car
+    template_name = 'carsharing/car_delete.html'
+    success_url = '/carsharing/'
 
 
 def cars(request):
@@ -13,14 +37,16 @@ def cars(request):
 
 
 def create(request):
+    if not request.user.is_superuser and not request.user.is_staff:
+        raise PermissionDenied()
     error = ''
     if request.POST:
-        form = CarForm(request.POST)
+        form = CarForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/carsharing/')
         else:
-            error= form.errors
+            error = form.errors
 
     form = CarForm()
     context = {

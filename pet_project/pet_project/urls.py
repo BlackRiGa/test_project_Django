@@ -27,8 +27,14 @@ urlpatterns = [
                   path('', include('main.urls')),
 
                   path('carsharing/', include('carsharing.urls')),
-                  path('market/', include('market.urls'))
-              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  path('market/', include('market.urls')),
+                  path('ckeditor/', include('ckeditor_uploader.urls')),
+                  path('api-auth/', include('rest_framework.urls')),
+              ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = page_not_found
 handler505 = server_not_found

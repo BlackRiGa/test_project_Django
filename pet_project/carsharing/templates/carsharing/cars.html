@@ -1,14 +1,17 @@
 {% extends 'main/layout.html' %}
 
-{% block title%} Машины {% endblock %}
+{% block title %}Машина {% endblock %}
+
 {% block content %}
-<h1>Машины в наличии</h1>
+    <h1>Машины в наличии</h1>
+
     {% for car in cars %}
-        <div class = "alert alert-warning">
+        <div class="alert alert-warning">
             <h3>{{car.brand}}</h3>
-            <p>{{car.model}}</p>
-            <p>{{car.description}}</p>
+            <p>Модель: {{car.model}}</p>
+            <p>Цена: {{car.price}}</p>
+            <p><a href="{% url 'car_detail' car.id %}" class="btn btn-warning">Открыть</a></p>
         </div>
     {% endfor %}
-{% endblock %}
 
+{% endblock %}
